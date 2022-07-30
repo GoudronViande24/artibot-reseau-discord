@@ -1,0 +1,49 @@
+{
+	"version": "1.0.0",
+	"localizerVersion": 1,
+	"default": "en",
+	"contributors": [
+		"GoudronViande24"
+	],
+	"strings": {
+		"Check for an ID in the API": {
+			"fr": "Vérifier un ID dans l'API"
+		},
+
+		"ID to verify": {
+			"fr": "ID à vérifier"
+		},
+
+		"Interact with the Réseau Discord Artivain project": {
+			"fr": "Interagir avec l'API du projet Réseau Discord Artivain"
+		},
+
+		"Get the name of the database used": {
+			"fr": "Obtenir le nom de la base de données utilisée"
+		},
+
+		"Is suspect?": {
+			"fr": "Est suspect?"
+		},
+
+		"No": {
+			"fr": "Non"
+		},
+
+		"Yes": {
+			"fr": "Oui"
+		},
+
+		"Added by [[0]]": {
+			"fr": "Ajouté par [[0]]"
+		},
+
+		"On [[0]] ([[1]])": {
+			"fr": "Le [[0]] ([[1]])"
+		},
+
+		"Is blacklisted?": {
+			"fr": "Est sur la liste noire?"
+		}
+	}
+}
