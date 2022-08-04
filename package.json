@@ -10,6 +10,12 @@
     "prepublish": "tsc",
     "build": "tsc"
   },
+	"files": [
+		"dist/",
+		"src/",
+		"LICENSE",
+		"locales.json"
+	],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GoudronViande24/artibot-reseau-discord.git"

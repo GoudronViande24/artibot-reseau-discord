@@ -44,6 +44,118 @@
 
 		"Is blacklisted?": {
 			"fr": "Est sur la liste noire?"
+		},
+
+		"Alert": {
+			"fr": "Alerte"
+		},
+
+		"A user reported as suspect has joined your server.": {
+			"fr": "Un utilisateur reporté comme suspect vient de rejoindre votre serveur."
+		},
+
+		"Server": {
+			"fr": "Serveur"
+		},
+
+		"User": {
+			"fr": "Utilisateur"
+		},
+
+		"An error occured when trying to send alert DM: ": {
+			"fr": "Une erreur est survenue en envoyant l'alerte en message privé: "
+		},
+
+		"Role [[0]] not found in [[1]]": {
+			"fr": "Le role [[0]] n'a pas été trouvé dans le serveur [[1]]"
+		},
+
+		"Kicked by security filter": {
+			"fr": "Expulsé par un filtre de sécurité"
+		},
+
+		"You have been automaticaly kicked from the server because you have been reported.\nContact an administrator to learn more.\n\nHere is some data that might be useful:": {
+			"fr": "Vous avez été automatiquement expulsé du serveur car vous avez été signalé.\nContactez un administrateur pour obtenir plus de détails.\n\nVoici quelques données qui pourraient être utiles:"
+		},
+
+		"Database": {
+			"fr": "Base de données"
+		},
+
+		"List": {
+			"fr": "Liste"
+		},
+
+		"Suspects": {
+			"fr": "Suspects"
+		},
+
+		"Blacklist": {
+			"fr": "Liste noire"
+		},
+
+		"Failed to send DM to [[0]]: ": {
+			"fr": "Impossible d'envoyer un message privé à [[0]]: "
+		},
+
+		"Réseau Discord: Automatically kicked ([[0]])": {
+			"fr": "Réseau Discord: Expulsé automatiquement ([[0]])"
+		},
+
+		"Banned by security filter": {
+			"fr": "Banni par un filtre de sécurité"
+		},
+
+		"You have been automaticaly banned from the server because you have been reported.\nContact an administrator to learn more.\n\nHere is some data that might be useful:": {
+			"fr": "Vous avez été automatiquement banni du serveur car vous avez été signalé.\nContactez un administrateur pour obtenir plus de détails.\n\nVoici quelques données qui pourraient être utiles:"
+		},
+
+		"Réseau Discord: Automatically banned ([[0]])": {
+			"fr": "Réseau Discord: Banni automatiquement ([[0]])"
+		},
+
+		"Failed to kick [[0]]: ": {
+			"fr": "Impossible d'expulser [[0]]: "
+		},
+
+		"Failed to ban [[0]]: ": {
+			"fr": "Impossible de bannir [[0]]: "
+		},
+
+		"A blacklisted user has joined your server.": {
+			"fr": "Un utilisateur sur la liste noire vient de rejoindre votre serveur."
+		},
+
+		"This command is disabled.": {
+			"fr": "Cette commande est désactivée."
+		},
+
+		"Create the alert role to allow people to receive alerts.": {
+			"fr": "Créer le rôle d'alerte pour permettre à certaines personnes de recevoir les alertes."
+		},
+
+		"You must be an administrator to use this command.": {
+			"fr": "Vous devez être administrateur pour utiliser cette commande."
+		},
+
+		"The [[0]] role already exists!": {
+			"fr": "Le rôle [[0]] existe déjà!"
+		},
+
+		"Réseau Discord: Created alerts role": {
+			"fr": "Réseau Discord: Rôle pour les alertes créé"
+		},
+
+		"An error occured.": {
+			"fr": "Une erreur est survenue."
+		},
+
+		"An error occured when trying to create the alert role on [[0]]: ": {
+			"fr": "Une erreur est survenue en créant le rôle d'alerte sur [[0]]: "
+		},
+
+		"Role [[0]] created.": {
+			"fr": "Le rôle [[0]] a bien été créé."
 		}
 	}
 }

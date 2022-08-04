@@ -1,5 +1,5 @@
 import Artibot from "artibot";
-import artibotReseauDiscord from "./dist/index.js";
+import artibotReseauDiscord, { ArtibotRDConfigBuilder, MonitorOption } from "./dist/index.js";
 import token from "./private.js";
 
 const artibot = new Artibot({
@@ -11,6 +11,11 @@ const artibot = new Artibot({
 	debug: true
 });
 
-artibot.registerModule(artibotReseauDiscord);
+artibot.registerModule(artibotReseauDiscord, new ArtibotRDConfigBuilder()
+	.disableSlashCommand("check")
+	.setMonitorOption("blacklist", MonitorOption.Kick)
+	.setMonitorOption("suspect", MonitorOption.Alert)
+	.setAlertRoleName("ALERT ROLE")
+);
 
 artibot.login({ token });

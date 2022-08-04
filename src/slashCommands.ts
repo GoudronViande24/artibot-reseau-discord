@@ -1,10 +1,23 @@
 import Artibot, { Embed } from "artibot";
 import { CommandInteraction, CommandInteractionOptionResolver } from "discord.js";
-import { api, localizer } from "./index.js";
+import { api, localizer, rdConfig, thumbnail } from "./index.js";
 
-export default async function checkSlashCommand(interaction: CommandInteraction, { createEmbed }: Artibot): Promise<void> {
+export default async function slashCommands(interaction: CommandInteraction, { createEmbed }: Artibot): Promise<void> {
 	const options = interaction.options as CommandInteractionOptionResolver;
 	const commandName: string = options.getSubcommand();
+
+	if (!rdConfig.slashCommands[commandName]) {
+		await interaction.reply({
+			embeds: [
+				createEmbed()
+					.setDescription(localizer._("This command is disabled."))
+					.setColor("Yellow")
+			],
+			ephemeral: true
+		});
+		return;
+	}
+
 	await interaction.deferReply({ ephemeral: true });
 
 	switch (commandName) {
@@ -16,7 +29,7 @@ export default async function checkSlashCommand(interaction: CommandInteraction,
 			const embed: Embed = createEmbed()
 				.setTitle("Check | " + response.dbName)
 				.setDescription("`id`: " + id)
-				.setThumbnail("https://assets.artivain.com/fav/bots/ra-512.jpg")
+				.setThumbnail(thumbnail)
 				.addFields(
 					{
 						name: localizer._("Is suspect?"),
