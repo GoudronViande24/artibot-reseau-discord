@@ -1,10 +1,9 @@
 import Artibot, { Embed } from "artibot";
-import { CommandInteraction, CommandInteractionOptionResolver } from "discord.js";
+import { ChatInputCommandInteraction } from "discord.js";
 import { api, localizer, rdConfig, thumbnail } from "./index.js";
 
-export default async function slashCommands(interaction: CommandInteraction, { createEmbed }: Artibot): Promise<void> {
-	const options = interaction.options as CommandInteractionOptionResolver;
-	const commandName: string = options.getSubcommand();
+export default async function slashCommands(interaction: ChatInputCommandInteraction<"cached">, { createEmbed }: Artibot): Promise<void> {
+	const commandName: string = interaction.options.getSubcommand();
 
 	if (!rdConfig.slashCommands[commandName]) {
 		await interaction.reply({
@@ -22,7 +21,7 @@ export default async function slashCommands(interaction: CommandInteraction, { c
 
 	switch (commandName) {
 		case "check":
-			const id: string = options.getString("id");
+			const id: string = interaction.options.getString("id", true);
 
 			const response = await api.check(id);
 
@@ -78,7 +77,7 @@ export default async function slashCommands(interaction: CommandInteraction, { c
 			await interaction.editReply({
 				embeds: [
 					createEmbed()
-						.setTitle(await api.dbName() as string)
+						.setTitle(await api.dbName())
 				]
 			});
 			break;

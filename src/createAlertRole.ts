@@ -1,4 +1,4 @@
-import Artibot from "artibot";
+import Artibot, { log } from "artibot";
 import { Message, PermissionsBitField, roleMention } from "discord.js";
 import { localizer, rdConfig, thumbnail } from "./index.js";
 
@@ -48,7 +48,7 @@ export default async function createAlertRole(message: Message, args: string[], 
 					.setColor("Red")
 			]
 		}).catch();
-		artibot.log("Réseau Discord", localizer.__("An error occured when trying to create the alert role on [[0]]: ", {
+		log("Réseau Discord", localizer.__("An error occured when trying to create the alert role on [[0]]: ", {
 			placeholders: [message.guild.name]
 		}) + e.name + ": " + e.message, "warn");
 	});

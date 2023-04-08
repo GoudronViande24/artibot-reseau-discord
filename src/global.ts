@@ -1,8 +1,8 @@
-import Artibot from "artibot";
+import Artibot, { log } from "artibot";
 import { GuildMember, userMention, inlineCode } from "discord.js";
-import { api, localizer, rdConfig, thumbnail } from "./index.js";
+import { MonitorOption, api, localizer, rdConfig, thumbnail } from "./index.js";
 
-export default async function monitorsGlobal(artibot: Artibot) {
+export default async function monitorsGlobal(artibot: Artibot): Promise<void> {
 	artibot.client.on("guildMemberAdd", async (member: GuildMember) => {
 		const { id } = member;
 
@@ -12,10 +12,10 @@ export default async function monitorsGlobal(artibot: Artibot) {
 
 		if (results.suspect.status) {
 			switch (rdConfig.monitor.suspect) {
-				case 1: // Alert
+				case MonitorOption.Alert:
 					const role = member.guild.roles.cache.find(role => role.name.toLowerCase() == rdConfig.alertRoleName.toLowerCase());
 
-					if (!role) return artibot.log("Réseau Discord", localizer.__("Role [[0]] not found in [[1]]", { placeholders: [rdConfig.alertRoleName, member.guild.name] }), "debug");
+					if (!role) return log("Réseau Discord", localizer.__("Role [[0]] not found in [[1]]", { placeholders: [rdConfig.alertRoleName, member.guild.name] }), "debug");
 
 					const embed = artibot.createEmbed()
 						.setTitle(localizer._("Alert"))
@@ -37,11 +37,11 @@ export default async function monitorsGlobal(artibot: Artibot) {
 					for (const [, member] of role.members) {
 						member.send({
 							embeds: [embed]
-						}).catch(e => artibot.log("Réseau Discord", localizer._("An error occured when trying to send alert DM: ") + e.name + ": " + e.message, "debug"));
+						}).catch(e => log("Réseau Discord", localizer._("An error occured when trying to send alert DM: ") + e.name + ": " + e.message, "debug"));
 					}
 					break;
 
-				case 2: // Kick
+				case MonitorOption.Kick:
 					member.send({
 						embeds: [
 							artibot.createEmbed()
@@ -67,15 +67,15 @@ export default async function monitorsGlobal(artibot: Artibot) {
 								])
 						]
 					}).catch(e => {
-						artibot.log("Réseau Discord", localizer.__("Failed to send DM to [[0]]: ", { placeholders: [member.user.tag] }) + e.name + ": " + e.message, "debug")
+						log("Réseau Discord", localizer.__("Failed to send DM to [[0]]: ", { placeholders: [member.user.tag] }) + e.name + ": " + e.message, "debug")
 					}).finally(() => {
 						member.kick(localizer.__("Réseau Discord: Automatically kicked ([[0]])", { placeholders: ["suspect"] })).catch(e => {
-							artibot.log("Réseau Discord", localizer.__("Failed to kick [[0]]: ", { placeholders: [member.user.tag] }) + e.name + ": " + e.message, "warn")
+							log("Réseau Discord", localizer.__("Failed to kick [[0]]: ", { placeholders: [member.user.tag] }) + e.name + ": " + e.message, "warn")
 						});
 					});
 					break;
 
-				case 3: // Ban
+				case MonitorOption.Ban:
 					member.send({
 						embeds: [
 							artibot.createEmbed()
@@ -101,23 +101,20 @@ export default async function monitorsGlobal(artibot: Artibot) {
 								])
 						]
 					}).catch(e => {
-						artibot.log("Réseau Discord", localizer.__("Failed to send DM to [[0]]: ", { placeholders: [member.user.tag] }) + e.name + ": " + e.message, "debug")
+						log("Réseau Discord", localizer.__("Failed to send DM to [[0]]: ", { placeholders: [member.user.tag] }) + e.name + ": " + e.message, "debug")
 					}).finally(() => {
 						member.ban({ reason: localizer.__("Réseau Discord: Automatically banned ([[0]])", { placeholders: ["suspect"] }), deleteMessageDays: 0 }).catch(e => {
-							artibot.log("Réseau Discord", localizer.__("Failed to ban [[0]]: ", { placeholders: [member.user.tag] }) + e.name + ": " + e.message, "warn")
+							log("Réseau Discord", localizer.__("Failed to ban [[0]]: ", { placeholders: [member.user.tag] }) + e.name + ": " + e.message, "warn")
 						});
 					});
-
-				default:
-					break;
 			}
 
 			if (results.blacklist.status) {
 				switch (rdConfig.monitor.blacklist) {
-					case 1: // Alert
+					case MonitorOption.Alert:
 						const role = member.guild.roles.cache.find(role => role.name.toLowerCase() == rdConfig.alertRoleName.toLowerCase());
 
-						if (!role) return artibot.log("Réseau Discord", localizer.__("Role [[0]] not found in [[1]]", { placeholders: [rdConfig.alertRoleName, member.guild.name] }), "debug");
+						if (!role) return log("Réseau Discord", localizer.__("Role [[0]] not found in [[1]]", { placeholders: [rdConfig.alertRoleName, member.guild.name] }), "debug");
 
 						const embed = artibot.createEmbed()
 							.setTitle(localizer._("Alert"))
@@ -139,11 +136,11 @@ export default async function monitorsGlobal(artibot: Artibot) {
 						for (const [, member] of role.members) {
 							member.send({
 								embeds: [embed]
-							}).catch(e => artibot.log("Réseau Discord", localizer._("An error occured when trying to send alert DM: ") + e.name + ": " + e.message, "debug"));
+							}).catch(e => log("Réseau Discord", localizer._("An error occured when trying to send alert DM: ") + e.name + ": " + e.message, "debug"));
 						}
 						break;
 
-					case 2: // Kick
+					case MonitorOption.Kick:
 						member.send({
 							embeds: [
 								artibot.createEmbed()
@@ -169,15 +166,15 @@ export default async function monitorsGlobal(artibot: Artibot) {
 									])
 							]
 						}).catch(e => {
-							artibot.log("Réseau Discord", localizer.__("Failed to send DM to [[0]]: ", { placeholders: [member.user.tag] }) + e.name + ": " + e.message, "debug")
+							log("Réseau Discord", localizer.__("Failed to send DM to [[0]]: ", { placeholders: [member.user.tag] }) + e.name + ": " + e.message, "debug")
 						}).finally(() => {
 							member.kick(localizer.__("Réseau Discord: Automatically kicked ([[0]])", { placeholders: ["blacklisted"] })).catch(e => {
-								artibot.log("Réseau Discord", localizer.__("Failed to kick [[0]]: ", { placeholders: [member.user.tag] }) + e.name + ": " + e.message, "warn")
+								log("Réseau Discord", localizer.__("Failed to kick [[0]]: ", { placeholders: [member.user.tag] }) + e.name + ": " + e.message, "warn")
 							});
 						});
 						break;
 
-					case 3: // Ban
+					case MonitorOption.Ban:
 						member.send({
 							embeds: [
 								artibot.createEmbed()
@@ -203,15 +200,12 @@ export default async function monitorsGlobal(artibot: Artibot) {
 									])
 							]
 						}).catch(e => {
-							artibot.log("Réseau Discord", localizer.__("Failed to send DM to [[0]]: ", { placeholders: [member.user.tag] }) + e.name + ": " + e.message, "debug")
+							log("Réseau Discord", localizer.__("Failed to send DM to [[0]]: ", { placeholders: [member.user.tag] }) + e.name + ": " + e.message, "debug")
 						}).finally(() => {
 							member.ban({ reason: localizer.__("Réseau Discord: Automatically banned ([[0]])", { placeholders: ["blacklisted"] }), deleteMessageDays: 0 }).catch(e => {
-								artibot.log("Réseau Discord", localizer.__("Failed to ban [[0]]: ", { placeholders: [member.user.tag] }) + e.name + ": " + e.message, "warn")
+								log("Réseau Discord", localizer.__("Failed to ban [[0]]: ", { placeholders: [member.user.tag] }) + e.name + ": " + e.message, "warn")
 							});
 						});
-
-					default:
-						break;
 				}
 			}
 		}

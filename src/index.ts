@@ -18,16 +18,16 @@ const { version } = require('../package.json');
 
 interface ArtibotRDConfig {
 	slashCommands: {
-		check: boolean,
-		dbname: boolean
+		check: boolean;
+		dbname: boolean;
 	}
 
-	alertRoleName: string
-	baseUrl: string
+	alertRoleName: string;
+	baseUrl: string;
 
 	monitor: {
-		suspect: MonitorOption,
-		blacklist: MonitorOption
+		suspect: MonitorOption;
+		blacklist: MonitorOption;
 	}
 }
 
@@ -89,8 +89,7 @@ export class ArtibotRDConfigBuilder implements ArtibotRDConfig {
 	}
 }
 
-export default function artibotReseauDiscord({ config: { lang } }: Artibot, cfg: Object): Module {
-	const config: ArtibotRDConfig = cfg as ArtibotRDConfig;
+export default function artibotReseauDiscord({ config: { lang } }: Artibot, config: ArtibotRDConfig): Module {
 	rdConfig = config;
 	localizer.setLocale(lang);
 
